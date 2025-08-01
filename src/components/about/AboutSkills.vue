@@ -33,10 +33,11 @@ defineOptions({
   name: 'AboutSkills',
 })
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue' // Thêm onUnmounted
 import SkillSection from '@/components/about/SkillSection.vue'
 
 const animatedSkills = ref({})
+const timeoutIds = [] // Mảng để lưu trữ các ID của timeout
 
 const frontendSkills = ref([
   { name: 'Vue.js', level: 90, color: 'green' },
@@ -53,21 +54,33 @@ const backendSkills = ref([
 ])
 
 const animateSkills = () => {
-  setTimeout(() => {
+  const mainTimeout = setTimeout(() => {
     ;[...frontendSkills.value, ...backendSkills.value].forEach((skill, index) => {
-      setTimeout(() => {
-        animatedSkills.value[skill.name] = skill.level
+      const skillTimeout = setTimeout(() => {
+        // Kiểm tra xem animatedSkills còn tồn tại không trước khi cập nhật
+        if (animatedSkills.value) {
+          animatedSkills.value[skill.name] = skill.level
+        }
       }, index * 300)
+      timeoutIds.push(skillTimeout) // Lưu ID của timeout con
     })
   }, 1000)
+  timeoutIds.push(mainTimeout) // Lưu ID của timeout chính
 }
 
 onMounted(() => {
-  setTimeout(animateSkills, 2000)
+  const initialTimeout = setTimeout(animateSkills, 2000)
+  timeoutIds.push(initialTimeout)
+})
+
+// Dọn dẹp tất cả các timeout khi component bị hủy
+onUnmounted(() => {
+  timeoutIds.forEach((id) => clearTimeout(id))
 })
 </script>
 
 <style scoped>
+/* ... (CSS giữ nguyên) ... */
 .floating-card {
   animation: floatUp 0.8s ease-out forwards;
   opacity: 0;

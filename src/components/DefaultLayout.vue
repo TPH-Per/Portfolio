@@ -12,7 +12,7 @@
         <template v-slot:subtitle>
           <div class="mt-2">
             <v-icon size="x-small" icon="mdi-email-outline"></v-icon>
-            phuchung3322@gmail.com
+            phuchung322@gmail.com
             <br />
             <v-icon size="x-small" icon="mdi-phone-outline"></v-icon>
             0559601038
@@ -66,9 +66,10 @@
 <script setup>
 import avatarImage from '../assets/suipadoru.jpg'
 import LanguageSwitcher from './LanguageSwitcher.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
+import { debounce } from 'lodash-es' // 👈 Thêm import debounce
 
 const { t } = useI18n()
 const route = useRoute()
@@ -85,53 +86,56 @@ const navItems = computed(() => [
 const titleText = "Welcome to Per's Portfolio"
 const titleChars = titleText.split('')
 
-// --- LOGIC CUỘN CHUỘT HOÀN CHỈNH ---
 const mainContent = ref(null)
-let canNavigate = true
 
-const handleWheel = (event) => {
-  const el = mainContent.value?.$el
-  if (!el || !canNavigate) {
-    return
-  }
+// Sử dụng debounce cho hàm handleWheel
+const handleWheel = debounce(
+  (event) => {
+    const el = mainContent.value?.$el
+    if (!el) return
 
-  const isScrollingDown = event.deltaY > 0
-  const isScrollingUp = event.deltaY < 0
-  const isAtBottom = Math.ceil(el.scrollTop) + el.clientHeight >= el.scrollHeight
-  const isAtTop = el.scrollTop === 0
+    const isScrollingDown = event.deltaY > 0
+    const isScrollingUp = event.deltaY < 0
+    const isAtBottom = Math.ceil(el.scrollTop) + el.clientHeight >= el.scrollHeight
+    const isAtTop = el.scrollTop === 0
 
-  const currentPath = route.path
-  const currentIndex = navItems.value.findIndex((item) => item.path === currentPath)
-  let targetPath = null
+    const currentPath = route.path
+    const currentIndex = navItems.value.findIndex((item) => item.path === currentPath)
+    let targetPath = null
 
-  if (isScrollingDown && isAtBottom && currentIndex < navItems.value.length - 1) {
-    targetPath = navItems.value[currentIndex + 1].path
-  } else if (isScrollingUp && isAtTop && currentIndex > 0) {
-    targetPath = navItems.value[currentIndex - 1].path
-  }
+    if (isScrollingDown && isAtBottom && currentIndex < navItems.value.length - 1) {
+      targetPath = navItems.value[currentIndex + 1].path
+    } else if (isScrollingUp && isAtTop && currentIndex > 0) {
+      targetPath = navItems.value[currentIndex - 1].path
+    }
 
-  if (targetPath) {
-    canNavigate = false
-    router.push(targetPath)
-    setTimeout(() => {
-      canNavigate = true
-    }, 1000) // Thời gian chờ để tránh cuộn liên tục
-  }
-}
+    if (targetPath) {
+      router.push(targetPath)
+    }
+  },
+  300,
+  { leading: true, trailing: false },
+) // Kích hoạt ngay lần cuộn đầu tiên, sau đó chờ
+
+onMounted(() => {
+  // Logic onMounted nếu cần
+})
+
+onUnmounted(() => {
+  handleWheel.cancel() // Hủy debounce khi component bị hủy
+})
 </script>
 
 <style scoped>
-/* Class này rất quan trọng để logic cuộn hoạt động */
+/* Các style khác giữ nguyên */
 .main-container {
   height: 100vh;
   overflow-y: auto;
 }
-
-/* Các style khác giữ nguyên */
 .profile-avatar {
   border-radius: 20px;
   margin: 16px;
-  box-shadow: 0 4px 8px rgb(0 0 0);
+  box-shadow: 0 4px 8px #000;
 }
 .title-container {
   display: flex;
@@ -144,7 +148,7 @@ const handleWheel = (event) => {
   font-size: 1.4rem;
   font-weight: 700;
   color: #fff;
-  -webkit-text-stroke: 0.3px #f00;
+  -webkit-text-stroke: 0.3px red;
   text-shadow:
     0 0 5px #fff5,
     0 2px 4px #0003;
@@ -169,7 +173,7 @@ const handleWheel = (event) => {
 }
 @keyframes gentle-bounce {
   0%,
-  100% {
+  to {
     transform: translateY(0) scale(1);
   }
   50% {
@@ -178,7 +182,7 @@ const handleWheel = (event) => {
 }
 @keyframes rgb-stroke {
   0% {
-    -webkit-text-stroke-color: #f00;
+    -webkit-text-stroke-color: red;
   }
   16.66% {
     -webkit-text-stroke-color: #ff7700;
@@ -187,7 +191,7 @@ const handleWheel = (event) => {
     -webkit-text-stroke-color: #ffdd00;
   }
   50% {
-    -webkit-text-stroke-color: #0f0;
+    -webkit-text-stroke-color: green;
   }
   66.66% {
     -webkit-text-stroke-color: #09f;
