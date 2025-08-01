@@ -1,33 +1,36 @@
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export function useTimeline() {
-  const timeline = ref([
+  const { t } = useI18n()
+
+  const timeline = computed(() => [
     {
       id: 1,
       date: 'July 2025',
-      title: 'JLPT N2 Exam',
-      description: 'Take the Japanese Language Proficiency Test N2',
+      title: t('timeline.milestone1.title'),
+      description: t('timeline.milestone1.description'),
       completed: false,
     },
     {
       id: 2,
       date: 'September 2025',
-      title: 'IELTS Test',
-      description: 'Achieve target band score of 7.0',
+      title: t('timeline.milestone2.title'),
+      description: t('timeline.milestone2.description'),
       completed: false,
     },
     {
       id: 3,
       date: 'December 2025',
-      title: 'First AI Project',
-      description: 'Complete first Deep Learning project with IoT integration',
+      title: t('timeline.milestone3.title'),
+      description: t('timeline.milestone3.description'),
       completed: false,
     },
     {
       id: 4,
       date: 'March 2026',
-      title: 'Computer Vision App',
-      description: 'Deploy computer vision application to production',
+      title: t('timeline.milestone4.title'),
+      description: t('timeline.milestone4.description'),
       completed: false,
     },
   ])

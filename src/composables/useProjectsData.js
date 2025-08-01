@@ -1,14 +1,15 @@
-// composables/useProjectsData.js
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export function useProjectsData() {
-  const projects = ref([
+  const { t } = useI18n()
+
+  const projects = computed(() => [
     {
       id: 1,
-      title: 'E-Commerce Platform',
-      subtitle: 'Vue.js & Node.js',
-      description:
-        'Một nền tảng thương mại điện tử hoàn chỉnh với quản lý sản phẩm, giỏ hàng và thanh toán trực tuyến.',
+      title: t('projects.project1.title'),
+      subtitle: t('projects.project1.subtitle'),
+      description: t('projects.project1.description'),
       image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400',
       github: 'https://github.com/TPH-Per/ecommerce-platform',
       demo: 'https://demo-ecommerce.com',
@@ -21,10 +22,9 @@ export function useProjectsData() {
     },
     {
       id: 2,
-      title: 'Task Management App',
-      subtitle: 'React & Firebase',
-      description:
-        'Ứng dụng quản lý công việc với tính năng real-time collaboration và notification system.',
+      title: t('projects.project2.title'),
+      subtitle: t('projects.project2.subtitle'),
+      description: t('projects.project2.description'),
       image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400',
       github: 'https://github.com/TPH-Per/task-manager',
       demo: null,
@@ -35,7 +35,6 @@ export function useProjectsData() {
         { name: 'TypeScript', icon: 'mdi-language-typescript', color: 'blue-darken-4' },
       ],
     },
-    // ... các project khác
   ])
 
   return {

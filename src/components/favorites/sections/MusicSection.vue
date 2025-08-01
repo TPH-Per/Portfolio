@@ -1,9 +1,9 @@
 <template>
   <div class="category-section">
-    <SectionHeader title="Music Taste" icon="mdi-music-note" />
+    <SectionHeader :title="$t('favorites.musicTaste')" icon="mdi-music-note" />
 
     <MusicSubsection
-      title="Anison"
+      :title="$t('favorites.anison')"
       icon="mdi-microphone"
       icon-color="pink"
       :songs="anisonList"
@@ -12,7 +12,7 @@
     />
 
     <MusicSubsection
-      title="Vocaloid"
+      :title="$t('favorites.vocaloid')"
       icon="mdi-robot"
       icon-color="cyan"
       :songs="vocaloidList"
@@ -30,11 +30,11 @@ import { useFavoritesData } from '@/composables/useFavoritesData'
 const { anisonList, vocaloidList } = useFavoritesData()
 
 const handlePlaySong = (song) => {
-  // Xử lý logic phát nhạc ở đây
   console.log('Playing song:', song.title, 'by', song.artist)
-  // Có thể emit event lên parent hoặc gọi service phát nhạc
 }
 </script>
+
+<!-- CSS giữ nguyên -->
 
 <style scoped>
 .category-section {

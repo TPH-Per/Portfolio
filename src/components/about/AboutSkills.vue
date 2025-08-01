@@ -4,19 +4,19 @@
       <v-card elevation="4" class="pa-6 floating-card">
         <v-card-title class="text-h4 mb-6 slide-in-right">
           <v-icon left color="orange" size="large" class="rotate-icon"> mdi-tools </v-icon>
-          Skills
+          {{ $t('about.skills') }}
         </v-card-title>
         <v-row>
           <v-col cols="12" md="6">
             <SkillSection
-              title="Frontend Technologies"
+              :title="$t('about.frontendTech')"
               :skills="frontendSkills"
               :animated-skills="animatedSkills"
             />
           </v-col>
           <v-col cols="12" md="6">
             <SkillSection
-              title="Backend Technologies"
+              :title="$t('about.backendTech')"
               :skills="backendSkills"
               :animated-skills="animatedSkills"
               :delay-offset="4"

@@ -1,6 +1,6 @@
 <template>
   <v-card-text class="tech-section">
-    <div class="tech-label">Công nghệ sử dụng:</div>
+    <div class="tech-label">{{ $t('projects.technologies') }}</div>
     <div class="tech-chips">
       <v-chip
         v-for="(tech, techIndex) in technologies"
@@ -29,6 +29,8 @@ defineProps({
   },
 })
 </script>
+
+<!-- CSS giữ nguyên -->
 
 <style scoped>
 .tech-section {

@@ -10,16 +10,20 @@
         {{ char === ' ' ? '\u00A0' : char }}
       </span>
     </h1>
-    <p class="subtitle">Những thứ tôi yêu thích và đam mê</p>
+    <p class="subtitle">{{ $t('favorites.subtitle') }}</p>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const titleText = 'MY FAVORITES'
-const titleChars = computed(() => titleText.split(''))
+const { t } = useI18n()
+const titleText = computed(() => t('favorites.title'))
+const titleChars = computed(() => titleText.value.split(''))
 </script>
+
+<!-- CSS giữ nguyên -->
 
 <style scoped>
 .page-header {

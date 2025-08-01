@@ -10,16 +10,20 @@
         {{ char === ' ' ? '\u00A0' : char }}
       </span>
     </h1>
-    <p class="header-subtitle fade-in-up">Khám phá những dự án tôi đã thực hiện</p>
+    <p class="header-subtitle fade-in-up">{{ $t('projects.subtitle') }}</p>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const headerText = 'MY PROJECTS'
-const headerChars = computed(() => headerText.split(''))
+const { t } = useI18n()
+const headerText = computed(() => t('projects.title'))
+const headerChars = computed(() => headerText.value.split(''))
 </script>
+
+<!-- CSS giữ nguyên -->
 
 <style scoped>
 .page-header {

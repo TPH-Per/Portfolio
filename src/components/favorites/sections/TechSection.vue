@@ -1,5 +1,5 @@
 <template>
-  <BaseSection title="Learning Technology" icon="mdi-code-tags">
+  <BaseSection :title="$t('favorites.learningTech')" icon="mdi-code-tags">
     <div class="tech-grid">
       <div
         v-for="(tech, index) in techList"
@@ -16,11 +16,12 @@
 <script setup>
 import BaseSection from './BaseSection.vue'
 import TechCard from '../cards/TechCard.vue'
+import { useFavoritesData } from '@/composables/useFavoritesData'
 
-defineProps({
-  techList: Array,
-})
+const { techList } = useFavoritesData()
 </script>
+
+<!-- CSS giữ nguyên -->
 
 <style scoped>
 .tech-grid {

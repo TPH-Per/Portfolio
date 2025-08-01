@@ -7,7 +7,7 @@
     <h3 class="tech-name">{{ tech.name }}</h3>
     <p class="tech-description">{{ tech.description }}</p>
     <div class="progress-wrapper">
-      <div class="progress-label">Learning Progress</div>
+      <div class="progress-label">{{ $t('about.learningProgress') }}</div>
       <v-progress-linear
         :model-value="tech.progress"
         :color="tech.color"
@@ -40,6 +40,8 @@ defineProps({
   },
 })
 </script>
+
+<!-- CSS giữ nguyên -->
 
 <style scoped>
 .tech-card {

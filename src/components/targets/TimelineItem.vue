@@ -9,7 +9,7 @@
         size="small"
         class="timeline-status"
       >
-        {{ milestone.completed ? 'Completed' : 'Target' }}
+        {{ milestone.completed ? $t('targets.completed') : $t('targets.target') }}
       </v-chip>
     </div>
     <div class="timeline-dot" :class="{ completed: milestone.completed }"></div>
@@ -31,9 +31,10 @@ const props = defineProps({
 })
 
 const positionClass = computed(() => (props.index % 2 === 0 ? 'timeline-left' : 'timeline-right'))
-
 const animationDelay = computed(() => `${props.index * 0.3}s`)
 </script>
+
+<!-- CSS giữ nguyên -->
 
 <style scoped>
 .timeline-item {

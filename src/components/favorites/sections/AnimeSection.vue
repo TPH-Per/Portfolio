@@ -1,6 +1,6 @@
 <template>
   <div class="category-section">
-    <SectionHeader title="Anime Watching" icon="mdi-television-play" />
+    <SectionHeader :title="$t('favorites.animeWatching')" icon="mdi-television-play" />
     <v-row>
       <v-col
         v-for="(anime, index) in animeList"
@@ -25,6 +25,8 @@ import { useFavoritesData } from '@/composables/useFavoritesData'
 
 const { animeList } = useFavoritesData()
 </script>
+
+<!-- CSS giữ nguyên -->
 
 <style scoped>
 .category-section {

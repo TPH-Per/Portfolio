@@ -4,7 +4,7 @@
       <v-card elevation="4" class="pa-6 floating-card">
         <v-card-title class="text-h4 mb-6 slide-in-right">
           <v-icon left color="purple" size="large" class="shake-icon"> mdi-certificate </v-icon>
-          Certificates
+          {{ $t('about.certificates') }}
         </v-card-title>
         <v-row>
           <v-col cols="12" md="6" v-for="(cert, index) in certificates" :key="cert.title">
@@ -32,7 +32,7 @@
                     class="ms-2"
                   >
                     <v-icon icon="mdi-check-circle" size="x-small" class="me-1"></v-icon>
-                    Verified
+                    {{ $t('about.verified') }}
                   </v-chip>
                 </div>
               </v-card-title>
@@ -109,7 +109,9 @@
                   rounded
                   class="flex-grow-1"
                 ></v-progress-linear>
-                <span class="text-caption ms-2">{{ cert.progress }}% Complete</span>
+                <span class="text-caption ms-2"
+                  >{{ cert.progress }}% {{ $t('about.complete') }}</span
+                >
               </v-card-actions>
             </v-card>
           </v-col>
@@ -139,7 +141,7 @@
         <p class="mb-3">{{ selectedCert.description }}</p>
 
         <div v-if="selectedCert.details" class="mb-3">
-          <h4 class="text-h6 mb-2">Course Details:</h4>
+          <h4 class="text-h6 mb-2">{{ $t('about.courseDetails') }}:</h4>
           <ul>
             <li v-for="detail in selectedCert.details" :key="detail">
               {{ detail }}
@@ -148,7 +150,7 @@
         </div>
 
         <div v-if="selectedCert.skills">
-          <h4 class="text-h6 mb-2">Skills Covered:</h4>
+          <h4 class="text-h6 mb-2">{{ $t('about.skillsCovered') }}:</h4>
           <v-chip
             v-for="skill in selectedCert.skills"
             :key="skill"
@@ -172,9 +174,9 @@
           variant="elevated"
           prepend-icon="mdi-certificate"
         >
-          View Certificate
+          {{ $t('about.viewCertificate') }}
         </v-btn>
-        <v-btn color="grey" @click="certDialog = false">Close</v-btn>
+        <v-btn color="grey" @click="certDialog = false">{{ $t('about.close') }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -325,6 +327,7 @@ certificates.value.forEach((cert, index) => {
 })
 </script>
 
+<!-- CSS giữ nguyên như cũ -->
 <style scoped>
 .floating-card {
   animation: floatUp 0.8s ease-out forwards;

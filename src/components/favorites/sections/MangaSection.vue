@@ -1,6 +1,6 @@
 <template>
   <div class="category-section">
-    <SectionHeader title="Manga Reading" icon="mdi-book-open-page-variant" />
+    <SectionHeader :title="$t('favorites.mangaReading')" icon="mdi-book-open-page-variant" />
     <v-row>
       <v-col
         v-for="(manga, index) in mangaList"
@@ -24,6 +24,8 @@ import { useFavoritesData } from '@/composables/useFavoritesData'
 
 const { mangaList } = useFavoritesData()
 </script>
+
+<!-- CSS giữ nguyên -->
 
 <style scoped>
 .category-section {

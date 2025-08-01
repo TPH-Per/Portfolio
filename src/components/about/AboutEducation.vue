@@ -4,7 +4,7 @@
       <v-card elevation="4" class="pa-6 floating-card">
         <v-card-title class="text-h4 mb-6 slide-in-left">
           <v-icon left color="success" size="large" class="spinning-icon"> mdi-school </v-icon>
-          Education
+          {{ $t('about.education') }}
         </v-card-title>
         <v-timeline side="end" density="compact">
           <v-timeline-item
@@ -44,24 +44,27 @@ defineOptions({
   name: 'AboutEducation',
 })
 
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const education = ref([
+const { t } = useI18n()
+
+const education = computed(() => [
   {
     period: '2020 - 2024',
-    degree: 'Bachelor of Computer Science',
-    school: 'University of Technology',
+    degree: t('education.degree1'),
+    school: t('education.school1'),
     details: [
-      'Major: Software Engineering',
-      'GPA: 3.5/4.0',
-      'Relevant coursework: Data Structures, Algorithms, Database Systems, Web Development',
+      t('education.details1.item1'),
+      t('education.details1.item2'),
+      t('education.details1.item3'),
     ],
   },
   {
     period: '2017 - 2020',
-    degree: 'High School Diploma',
-    school: 'Technology High School',
-    details: ['Specialized in Mathematics and Computer Science', 'Graduated with honors'],
+    degree: t('education.degree2'),
+    school: t('education.school2'),
+    details: [t('education.details2.item1'), t('education.details2.item2')],
   },
 ])
 </script>

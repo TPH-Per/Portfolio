@@ -28,6 +28,13 @@ export default {
     certificates: '証明書',
     frontendTech: 'フロントエンド技術',
     backendTech: 'バックエンド技術',
+    verified: '検証済み',
+    viewCertificate: '証明書を表示',
+    close: '閉じる',
+    courseDetails: 'コース詳細',
+    skillsCovered: 'カバーされるスキル',
+    complete: '完了',
+    learningProgress: '学習進度',
   },
   projects: {
     title: 'マイプロジェクト',
@@ -64,5 +71,69 @@ export default {
     aiMlProjectsTitle: 'AI/MLプロジェクト',
     aiMlProjectsDescription:
       'ディープラーニング、IoT、コンピュータービジョンを統合したプロジェクトを開発する',
+  },
+  education: {
+    degree1: 'コンピュータサイエンス学士',
+    school1: '工科大学',
+    details1: [
+      '専攻：ソフトウェアエンジニアリング',
+      'GPA: 3.5/4.0',
+      '関連科目：データ構造、アルゴリズム、データベースシステム、Web開発',
+    ],
+    degree2: '高等学校卒業証書',
+    school2: '技術高等学校',
+    details2: ['数学とコンピュータサイエンス専攻', '優秀な成績で卒業'],
+  },
+
+  experience: {
+    position1: 'ジュニアフロントエンド開発者',
+    company1: 'テックソリューション株式会社',
+    type1: 'フルタイム',
+    details1: [
+      'Vue.jsとVuetifyフレームワークを使用してレスポンシブWebアプリケーションを開発',
+      'バックエンド開発者と協力してRESTful APIとGraphQLエンドポイントを統合',
+      'Scrumメソドロジーを使用したコードレビューとアジャイル開発プロセスに参加',
+      'コード最適化とレイジーローディングによりアプリケーションのパフォーマンスを30%向上',
+      'ジュニア開発者2名をメンターし、技術ワークショップを実施',
+    ],
+    position2: 'Web開発インターン',
+    company2: 'デジタルエージェンシー株式会社',
+    type2: 'インターンシップ',
+    details2: [
+      'モダンWeb技術を使用してクライアントWebサイトを構築・維持',
+      '構想から展開まで5+のクライアントプロジェクトに従事',
+      'Web開発とプロジェクト管理のベストプラクティスを学習',
+      'チームプロジェクトに貢献し、バージョン管理の実践経験を獲得',
+      'UI/UXデザインの実装とレスポンシブデザインの原則をサポート',
+    ],
+    position3: 'フリーランスWeb開発者',
+    company3: '個人事業主',
+    type3: 'フリーランス',
+    details3: [
+      '中小企業とスタートアップ向けのカスタムWebサイトを開発',
+      'クライアント相談から展開まで、プロジェクト全体のライフサイクルを管理',
+      'SEOベストプラクティスを実装し、クライアントの検索ランキングを40%向上',
+      '継続的なクライアント関係を維持し、技術サポートを提供',
+      '10+のプロジェクトを時間通りかつ予算内で配信',
+    ],
+  },
+
+  timeline: {
+    milestone1: {
+      title: 'JLPT N2試験',
+      description: '日本語能力試験N2を受験',
+    },
+    milestone2: {
+      title: 'IELTS試験',
+      description: 'バンドスコア7.0の目標を達成',
+    },
+    milestone3: {
+      title: '最初のAIプロジェクト',
+      description: 'IoT統合を含む最初のディープラーニングプロジェクトを完了',
+    },
+    milestone4: {
+      title: 'コンピュータービジョンアプリ',
+      description: 'コンピュータービジョンアプリケーションを本番環境に展開',
+    },
   },
 }

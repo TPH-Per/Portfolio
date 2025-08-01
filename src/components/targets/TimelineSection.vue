@@ -3,7 +3,7 @@
     <v-col cols="12">
       <h2 class="section-title">
         <v-icon icon="mdi-timeline-clock" size="30" color="primary"></v-icon>
-        Achievement Timeline
+        {{ $t('targets.achievementTimeline') }}
       </h2>
 
       <div class="timeline-container">

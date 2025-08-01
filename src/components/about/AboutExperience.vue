@@ -4,7 +4,7 @@
       <v-card elevation="4" class="pa-6 floating-card">
         <v-card-title class="text-h4 mb-6 slide-in-left">
           <v-icon left color="blue" size="large" class="bounce-icon"> mdi-briefcase </v-icon>
-          Experience
+          {{ $t('about.experience') }}
         </v-card-title>
         <v-timeline side="end" density="compact">
           <v-timeline-item
@@ -79,23 +79,26 @@ defineOptions({
   name: 'AboutExperience',
 })
 
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const experience = ref([
+const { t } = useI18n()
+
+const experience = computed(() => [
   {
     period: '2024 - Present',
-    position: 'Junior Frontend Developer',
-    company: 'Tech Solutions Co.',
-    type: 'Full-time',
+    position: t('experience.position1'),
+    company: t('experience.company1'),
+    type: t('experience.type1'),
     icon: 'mdi-code-tags',
     iconColor: 'primary',
     chipColor: 'success',
     details: [
-      'Developed responsive web applications using Vue.js and Vuetify framework',
-      'Collaborated with backend developers to integrate RESTful APIs and GraphQL endpoints',
-      'Participated in code reviews and agile development processes using Scrum methodology',
-      'Improved application performance by 30% through code optimization and lazy loading',
-      'Mentored 2 junior developers and conducted technical workshops',
+      t('experience.details1.item1'),
+      t('experience.details1.item2'),
+      t('experience.details1.item3'),
+      t('experience.details1.item4'),
+      t('experience.details1.item5'),
     ],
     technologies: [
       { name: 'Vue.js', color: 'green', icon: 'mdi-vuejs' },
@@ -106,18 +109,18 @@ const experience = ref([
   },
   {
     period: '2023 - 2024',
-    position: 'Web Development Intern',
-    company: 'Digital Agency Inc.',
-    type: 'Internship',
+    position: t('experience.position2'),
+    company: t('experience.company2'),
+    type: t('experience.type2'),
     icon: 'mdi-school-outline',
     iconColor: 'info',
     chipColor: 'info',
     details: [
-      'Built and maintained client websites using modern web technologies',
-      'Worked on 5+ client projects from conception to deployment',
-      'Learned best practices in web development and project management',
-      'Contributed to team projects and gained hands-on experience with version control',
-      'Assisted in UI/UX design implementation and responsive design principles',
+      t('experience.details2.item1'),
+      t('experience.details2.item2'),
+      t('experience.details2.item3'),
+      t('experience.details2.item4'),
+      t('experience.details2.item5'),
     ],
     technologies: [
       { name: 'HTML/CSS', color: 'blue', icon: 'mdi-language-html5' },
@@ -128,18 +131,18 @@ const experience = ref([
   },
   {
     period: '2022 - 2023',
-    position: 'Freelance Web Developer',
-    company: 'Self-employed',
-    type: 'Freelance',
+    position: t('experience.position3'),
+    company: t('experience.company3'),
+    type: t('experience.type3'),
     icon: 'mdi-laptop',
     iconColor: 'success',
     chipColor: 'warning',
     details: [
-      'Developed custom websites for small businesses and startups',
-      'Managed full project lifecycle from client consultation to deployment',
-      'Implemented SEO best practices and improved client search rankings by 40%',
-      'Maintained ongoing client relationships and provided technical support',
-      'Delivered 10+ projects on time and within budget',
+      t('experience.details3.item1'),
+      t('experience.details3.item2'),
+      t('experience.details3.item3'),
+      t('experience.details3.item4'),
+      t('experience.details3.item5'),
     ],
     technologies: [
       { name: 'React', color: 'blue', icon: 'mdi-react' },
