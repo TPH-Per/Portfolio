@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/',
     component: DefaultLayout,
-    redirect: '/about', // Mặc định sẽ chuyển đến trang /about
+    redirect: '/about',
     children: [
       {
         path: '/about',
@@ -42,6 +42,10 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  // Thêm hàm này để luôn cuộn lên đầu trang khi điều hướng
+  scrollBehavior() {
+    return { top: 0 }
+  },
 })
 
 export default router

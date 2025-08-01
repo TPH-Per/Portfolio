@@ -8,7 +8,6 @@
       :width="321"
     >
       <v-img :src="avatarImage" height="257" cover class="profile-avatar"></v-img>
-
       <v-list-item title="Thái Phúc Hưng" class="pa-4">
         <template v-slot:subtitle>
           <div class="mt-2">
@@ -23,9 +22,7 @@
           </div>
         </template>
       </v-list-item>
-
       <v-divider></v-divider>
-
       <v-list nav density="compact">
         <v-list-item
           v-for="item in navItems"
@@ -56,22 +53,28 @@
       <v-btn :icon="drawer ? 'mdi-close' : 'mdi-menu'" @click="drawer = !drawer"></v-btn>
     </v-app-bar>
 
-    <v-main style="background-color: #f0f2f5">
-      <router-view />
+    <v-main ref="mainContent" class="main-container" @wheel="handleWheel">
+      <router-view v-slot="{ Component }">
+        <transition name="page-transition" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </v-main>
   </v-app>
 </template>
 
 <script setup>
 import avatarImage from '../assets/suipadoru.jpg'
-import LanguageSwitcher from './LanguageSwitcher.vue' // 👈 Import component
-import { ref, computed } from 'vue' // 👈 Thêm computed
+import LanguageSwitcher from './LanguageSwitcher.vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
 
 const { t } = useI18n()
+const route = useRoute()
+const router = useRouter()
 const drawer = ref(true)
 
-// 👇 Biến navItems thành một computed property để nó có thể phản ứng với thay đổi ngôn ngữ
 const navItems = computed(() => [
   { title: t('navigation.about'), icon: 'mdi-account', path: '/about' },
   { title: t('navigation.projects'), icon: 'mdi-gavel', path: '/project' },
@@ -81,116 +84,150 @@ const navItems = computed(() => [
 
 const titleText = "Welcome to Per's Portfolio"
 const titleChars = titleText.split('')
+
+// --- LOGIC CUỘN CHUỘT HOÀN CHỈNH ---
+const mainContent = ref(null)
+let canNavigate = true
+
+const handleWheel = (event) => {
+  const el = mainContent.value?.$el
+  if (!el || !canNavigate) {
+    return
+  }
+
+  const isScrollingDown = event.deltaY > 0
+  const isScrollingUp = event.deltaY < 0
+  const isAtBottom = Math.ceil(el.scrollTop) + el.clientHeight >= el.scrollHeight
+  const isAtTop = el.scrollTop === 0
+
+  const currentPath = route.path
+  const currentIndex = navItems.value.findIndex((item) => item.path === currentPath)
+  let targetPath = null
+
+  if (isScrollingDown && isAtBottom && currentIndex < navItems.value.length - 1) {
+    targetPath = navItems.value[currentIndex + 1].path
+  } else if (isScrollingUp && isAtTop && currentIndex > 0) {
+    targetPath = navItems.value[currentIndex - 1].path
+  }
+
+  if (targetPath) {
+    canNavigate = false
+    router.push(targetPath)
+    setTimeout(() => {
+      canNavigate = true
+    }, 1000) // Thời gian chờ để tránh cuộn liên tục
+  }
+}
 </script>
 
 <style scoped>
-/* Profile avatar styling */
+/* Class này rất quan trọng để logic cuộn hoạt động */
+.main-container {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Các style khác giữ nguyên */
 .profile-avatar {
   border-radius: 20px;
   margin: 16px;
-  box-shadow: 0 4px 8px rgb(0, 0, 0);
+  box-shadow: 0 4px 8px rgb(0 0 0);
 }
-
-/* Title container - căn giữa */
 .title-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
-
-/* Animated title characters */
 .cool-title-char {
   display: inline-block;
-  position: relative;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #ffffff;
-
-  /* RGB animated border cho viền chữ */
-  -webkit-text-stroke-width: 0.3px;
-  -webkit-text-stroke-color: #ff0000;
-
-  /* Shadow và glow effects */
+  color: #fff;
+  -webkit-text-stroke: 0.3px #f00;
   text-shadow:
-    0 0 5px rgba(255, 255, 255, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.2);
-
-  /* Animations */
+    0 0 5px #fff5,
+    0 2px 4px #0003;
   animation:
     gentle-bounce 3s ease-in-out infinite,
     rgb-stroke 2s linear infinite,
     rgb-glow 4s ease-in-out infinite alternate;
 }
-
+.page-transition-enter-active,
+.page-transition-leave-active {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+.page-transition-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.page-transition-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
 @keyframes gentle-bounce {
   0%,
   100% {
     transform: translateY(0) scale(1);
   }
-
   50% {
     transform: translateY(-3px) scale(1.05);
   }
 }
-
 @keyframes rgb-stroke {
   0% {
-    -webkit-text-stroke-color: #ff0000; /* Đỏ */
+    -webkit-text-stroke-color: #f00;
   }
   16.66% {
-    -webkit-text-stroke-color: #ff7700; /* Cam */
+    -webkit-text-stroke-color: #ff7700;
   }
   33.33% {
-    -webkit-text-stroke-color: #ffdd00; /* Vàng */
+    -webkit-text-stroke-color: #ffdd00;
   }
   50% {
-    -webkit-text-stroke-color: #00ff00; /* Xanh lá */
+    -webkit-text-stroke-color: #0f0;
   }
   66.66% {
-    -webkit-text-stroke-color: #0099ff; /* Xanh dương */
+    -webkit-text-stroke-color: #09f;
   }
   83.33% {
-    -webkit-text-stroke-color: #6600ff; /* Tím */
+    -webkit-text-stroke-color: #60f;
   }
-  100% {
-    -webkit-text-stroke-color: #ff0099; /* Hồng */
+  to {
+    -webkit-text-stroke-color: #ff0099;
   }
 }
-
 @keyframes rgb-glow {
   0% {
-    filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.6));
+    filter: drop-shadow(0 0 8px #ff000099);
   }
   16.66% {
-    filter: drop-shadow(0 0 8px rgba(255, 119, 0, 0.6));
+    filter: drop-shadow(0 0 8px #ff770099);
   }
   33.33% {
-    filter: drop-shadow(0 0 8px rgba(255, 221, 0, 0.6));
+    -webkit-text-stroke-color: #ffdd00;
   }
   50% {
-    filter: drop-shadow(0 0 8px rgba(0, 255, 0, 0.6));
+    filter: drop-shadow(0 0 8px #00ff0099);
   }
   66.66% {
-    filter: drop-shadow(0 0 8px rgba(0, 153, 255, 0.6));
+    -webkit-text-stroke-color: #09f;
   }
   83.33% {
-    filter: drop-shadow(0 0 8px rgba(102, 0, 255, 0.6));
+    -webkit-text-stroke-color: #60f;
   }
-  100% {
-    filter: drop-shadow(0 0 8px rgba(255, 0, 153, 0.6));
+  to {
+    filter: drop-shadow(0 0 8px #ff009999);
   }
 }
-
-/* Hover effect cho title */
 .title-container:hover .cool-title-char {
   animation-duration: 1.5s, 1s, 2s;
   transform: scale(1.1);
   -webkit-text-stroke-width: 3px;
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8)) !important;
+  filter: drop-shadow(0 0 12px #fff8) !important;
 }
-
-/* Responsive cho mobile */
 @media (max-width: 600px) {
   .cool-title-char {
     font-size: 1.1rem;
