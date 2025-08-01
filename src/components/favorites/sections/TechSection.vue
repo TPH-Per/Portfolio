@@ -1,15 +1,14 @@
 <template>
-  <BaseSection :title="$t('favorites.learningTech')" icon="mdi-code-tags">
-    <div class="tech-grid">
-      <div
-        v-for="(tech, index) in techList"
-        :key="tech.id"
-        class="tech-item fade-in-item"
-        :style="{ animationDelay: index * 0.1 + 's' }"
-      >
-        <TechCard :tech="tech" />
-      </div>
-    </div>
+  <BaseSection
+    :title="$t('favorites.learningTech')"
+    icon="mdi-code-tags"
+    :items="techList"
+    :grid-columns="{ cols: 12, sm: 12, md: 6, lg: 4 }"
+    :has-subsections="false"
+  >
+    <template #item="{ item }">
+      <TechCard :tech="item" />
+    </template>
   </BaseSection>
 </template>
 
@@ -20,30 +19,3 @@ import { useFavoritesData } from '@/composables/useFavoritesData'
 
 const { techList } = useFavoritesData()
 </script>
-
-<!-- CSS giữ nguyên -->
-
-<style scoped>
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-.fade-in-item {
-  opacity: 0;
-  transform: translateY(50px);
-  animation: slide-in-up 0.8s ease-out forwards;
-}
-
-@keyframes slide-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>

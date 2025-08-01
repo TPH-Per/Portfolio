@@ -100,7 +100,6 @@
                 </div>
               </v-card-text>
 
-              <!-- Progress bar for course completion -->
               <v-card-actions v-if="cert.progress">
                 <v-progress-linear
                   :model-value="cert.progress"
@@ -120,7 +119,6 @@
     </v-col>
   </v-row>
 
-  <!-- Certificate Detail Dialog -->
   <v-dialog v-model="certDialog" max-width="600px">
     <v-card v-if="selectedCert">
       <v-card-title class="d-flex align-center">
@@ -188,146 +186,19 @@ defineOptions({
 })
 
 import { ref } from 'vue'
+import { useCertificatesData } from '@/composables/useCertificatesData' // 👈 Import composable mới
 
 const certDialog = ref(false)
 const selectedCert = ref(null)
 
-const certificates = ref([
-  {
-    title: 'Vue.js Developer Certification',
-    issuer: 'Vue Mastery',
-    description:
-      'Advanced Vue.js concepts and best practices including Composition API, Pinia state management, and performance optimization.',
-    date: '2024',
-    color: 'green',
-    icon: 'mdi-vuejs',
-    verified: true,
-    rating: 5,
-    credentialId: 'VM-2024-001',
-    url: 'https://vuejs.org',
-    skills: ['Vue 3', 'Composition API', 'Pinia', 'Vue Router'],
-    details: [
-      'Advanced component patterns and composition',
-      'State management with Pinia',
-      'Performance optimization techniques',
-      'Testing Vue applications',
-    ],
-  },
-  {
-    title: 'JavaScript ES6+ Certification',
-    issuer: 'freeCodeCamp',
-    description:
-      'Modern JavaScript features and programming concepts including async/await, modules, and advanced array methods.',
-    date: '2023',
-    color: 'yellow-darken-2',
-    icon: 'mdi-language-javascript',
-    verified: true,
-    rating: 4,
-    credentialId: 'FCC-JS-2023',
-    url: 'https://freecodecamp.org',
-    skills: ['ES6+', 'Async/Await', 'Modules', 'Destructuring'],
-    details: [
-      'Modern JavaScript syntax and features',
-      'Asynchronous programming patterns',
-      'Module system and imports/exports',
-      'Functional programming concepts',
-    ],
-  },
-  {
-    title: 'Responsive Web Design',
-    issuer: 'freeCodeCamp',
-    description:
-      'HTML, CSS, and responsive design principles for creating mobile-first, accessible web applications.',
-    date: '2023',
-    color: 'blue',
-    icon: 'mdi-web',
-    verified: true,
-    rating: 5,
-    credentialId: 'FCC-RWD-2023',
-    url: 'https://freecodecamp.org',
-    skills: ['HTML5', 'CSS3', 'Flexbox', 'Grid', 'Media Queries'],
-    details: [
-      'Semantic HTML and accessibility',
-      'Advanced CSS layouts with Flexbox and Grid',
-      'Responsive design patterns',
-      'CSS animations and transitions',
-    ],
-  },
-  {
-    title: 'Git Version Control',
-    issuer: 'GitHub',
-    description:
-      'Version control and collaboration workflows using Git and GitHub for team development.',
-    date: '2022',
-    color: 'grey-darken-2',
-    icon: 'mdi-git',
-    verified: true,
-    rating: 4,
-    credentialId: 'GH-GIT-2022',
-    url: 'https://github.com',
-    skills: ['Git', 'GitHub', 'Branching', 'Merging', 'Collaboration'],
-    details: [
-      'Git fundamentals and commands',
-      'Branching and merging strategies',
-      'Collaborative workflows',
-      'GitHub Actions and CI/CD',
-    ],
-  },
-  {
-    title: 'Node.js Backend Development',
-    issuer: 'Coursera',
-    description:
-      'Server-side JavaScript development with Node.js, Express.js, and database integration.',
-    date: '2023',
-    color: 'green-darken-2',
-    icon: 'mdi-nodejs',
-    verified: true,
-    rating: 4,
-    progress: 95,
-    credentialId: 'COUR-NODE-2023',
-    url: 'https://coursera.org',
-    skills: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs'],
-    details: [
-      'Node.js fundamentals and modules',
-      'Building REST APIs with Express.js',
-      'Database integration with MongoDB',
-      'Authentication and security',
-    ],
-  },
-  {
-    title: 'AWS Cloud Practitioner',
-    issuer: 'Amazon Web Services',
-    description:
-      'Cloud computing fundamentals and AWS services overview for developers and IT professionals.',
-    date: '2024',
-    color: 'orange',
-    icon: 'mdi-aws',
-    verified: false,
-    rating: 3,
-    progress: 60,
-    credentialId: 'AWS-CP-2024',
-    skills: ['AWS', 'Cloud Computing', 'EC2', 'S3', 'Lambda'],
-    details: [
-      'Cloud computing concepts and benefits',
-      'AWS core services overview',
-      'Security and compliance in AWS',
-      'Pricing and support models',
-    ],
-  },
-])
+const { certificates } = useCertificatesData() // 👈 Sử dụng composable để lấy dữ liệu
 
 const openCertificate = (cert) => {
   selectedCert.value = cert
   certDialog.value = true
 }
-
-// Add animation delays for staggered effect
-certificates.value.forEach((cert, index) => {
-  cert.animationDelay = index * 0.2
-})
 </script>
 
-<!-- CSS giữ nguyên như cũ -->
 <style scoped>
 .floating-card {
   animation: floatUp 0.8s ease-out forwards;

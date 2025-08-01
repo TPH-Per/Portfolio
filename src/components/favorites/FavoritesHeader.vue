@@ -1,17 +1,26 @@
 <template>
-  <div class="page-header">
-    <h1 class="main-title">
-      <span
-        v-for="(char, index) in titleChars"
-        :key="index"
-        class="title-char"
-        :style="{ animationDelay: index * 0.1 + 's' }"
-      >
-        {{ char === ' ' ? '\u00A0' : char }}
-      </span>
-    </h1>
-    <p class="subtitle">{{ $t('favorites.subtitle') }}</p>
-  </div>
+  <v-row justify="center" class="mb-8">
+    <v-col cols="12" md="10" lg="8">
+      <div class="text-center header-section">
+        <h1 class="display-1 font-weight-bold text-primary mb-4 bounce-in-title">
+          <span
+            v-for="(char, index) in titleChars"
+            :key="index"
+            class="animated-char"
+            :style="{ animationDelay: index * 0.1 + 's' }"
+          >
+            {{ char === ' ' ? '\u00A0' : char }}
+          </span>
+        </h1>
+        <p class="subtitle fade-in-up">{{ $t('favorites.subtitle') }}</p>
+        <v-divider
+          class="mx-auto animated-divider"
+          style="max-width: 200px; height: 3px"
+          color="primary"
+        ></v-divider>
+      </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script setup>
@@ -23,52 +32,38 @@ const titleText = computed(() => t('favorites.title'))
 const titleChars = computed(() => titleText.value.split(''))
 </script>
 
-<!-- CSS giữ nguyên -->
-
 <style scoped>
-.page-header {
-  text-align: center;
-  margin-bottom: 4rem;
+.header-section {
   position: relative;
   z-index: 2;
 }
 
-.main-title {
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  font-weight: 900;
-  margin-bottom: 1rem;
-  background: linear-gradient(45deg, #ff69b4, #ff1493, #9370db, #4169e1);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradient-flow 5s ease-in-out infinite;
+.display-1 {
+  font-size: 3rem !important;
+  color: #1976d2; /* Màu primary của Vuetify */
 }
 
-.title-char {
+.bounce-in-title .animated-char {
   display: inline-block;
-  animation: bounce-in 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
   opacity: 0;
+  animation: bounce-in 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
   transform: translateY(50px);
 }
 
 .subtitle {
-  font-size: 1.25rem;
-  color: #555;
+  font-size: 1.3rem;
+  color: #4a4a4a;
+  font-style: italic;
+  font-weight: 500;
   opacity: 0;
-  animation: fade-in-up 1s ease-out 1s forwards;
+  animation: fade-in-up 1s ease-out 1.2s forwards;
+  max-width: 600px;
+  margin: 0 auto 1.5rem auto; /* Căn giữa và thêm khoảng cách với divider */
 }
 
-@keyframes gradient-flow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.animated-divider {
+  opacity: 0;
+  animation: grow-divider 1s ease-out 1s forwards;
 }
 
 @keyframes bounce-in {
@@ -96,6 +91,27 @@ const titleChars = computed(() => titleText.value.split(''))
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes grow-divider {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 200px;
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .display-1 {
+    font-size: 2.5rem !important;
+  }
+  .subtitle {
+    font-size: 1.1rem;
   }
 }
 </style>

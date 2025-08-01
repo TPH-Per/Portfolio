@@ -3,7 +3,7 @@
     <AnimeSection v-show="activeCategory === 'anime'" />
     <MangaSection v-show="activeCategory === 'manga'" />
     <MusicSection v-show="activeCategory === 'music'" />
-    <TechnologySection v-show="activeCategory === 'tech'" />
+    <TechSection v-show="activeCategory === 'tech'" />
   </div>
 </template>
 
@@ -11,7 +11,7 @@
 import AnimeSection from './sections/AnimeSection.vue'
 import MangaSection from './sections/MangaSection.vue'
 import MusicSection from './sections/MusicSection.vue'
-import TechnologySection from './sections/TechSection.vue'
+import TechSection from './sections/TechSection.vue' // Sửa tên import ở đây
 
 defineProps({
   activeCategory: {

@@ -1,17 +1,26 @@
 <template>
-  <div class="page-header">
-    <h1 class="animated-header">
-      <span
-        v-for="(char, index) in headerChars"
-        :key="index"
-        class="header-char"
-        :style="{ animationDelay: index * 0.1 + 's' }"
-      >
-        {{ char === ' ' ? '\u00A0' : char }}
-      </span>
-    </h1>
-    <p class="header-subtitle fade-in-up">{{ $t('projects.subtitle') }}</p>
-  </div>
+  <v-row justify="center" class="mb-8">
+    <v-col cols="12" md="10" lg="8">
+      <div class="text-center header-section">
+        <h1 class="display-1 font-weight-bold text-primary mb-4 bounce-in-title">
+          <span
+            v-for="(char, index) in headerChars"
+            :key="index"
+            class="animated-char"
+            :style="{ animationDelay: index * 0.1 + 's' }"
+          >
+            {{ char === ' ' ? '\u00A0' : char }}
+          </span>
+        </h1>
+        <p class="header-subtitle fade-in-up">{{ $t('projects.subtitle') }}</p>
+        <v-divider
+          class="mx-auto animated-divider"
+          style="max-width: 200px; height: 3px"
+          color="primary"
+        ></v-divider>
+      </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script setup>
@@ -23,81 +32,83 @@ const headerText = computed(() => t('projects.title'))
 const headerChars = computed(() => headerText.value.split(''))
 </script>
 
-<!-- CSS giữ nguyên -->
-
 <style scoped>
-.page-header {
-  text-align: center;
-  margin-bottom: 4rem;
+.header-section {
   position: relative;
   z-index: 2;
 }
 
-.animated-header {
-  font-size: 3.5rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradient-shift 3s ease-in-out infinite;
+.display-1 {
+  font-size: 3rem !important;
+  color: #1976d2;
+  font-weight: 900; /* Tăng độ đậm cho tiêu đề */
 }
 
-.header-char {
+/* Hiệu ứng mới cho tiêu đề */
+.bounce-in-title .animated-char {
   display: inline-block;
-  animation: bounce-in 0.8s ease-out forwards;
   opacity: 0;
-  transform: translateY(50px) scale(0);
+  transform: translateY(40px);
+  animation: slide-in-fwd 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .header-subtitle {
-  font-size: 1.2rem;
-  color: #666;
+  font-size: 1.25rem;
+  color: #55606e;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   opacity: 0;
-  animation: fade-in-up 1s ease-out 0.5s forwards;
+  animation: fade-in-up 1s ease-out 1s forwards; /* Tăng delay */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.5rem;
 }
 
-/* Keyframes */
-@keyframes gradient-shift {
-  0%,
+.animated-divider {
+  opacity: 0;
+  animation: grow-divider 1s ease-out 1.2s forwards; /* Tăng delay */
+}
+
+/* Keyframes cho hiệu ứng mới */
+@keyframes slide-in-fwd {
+  0% {
+    transform: translateY(40px) scale(0.9);
+    opacity: 0;
+  }
   100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@keyframes bounce-in {
-  to {
-    opacity: 1;
     transform: translateY(0) scale(1);
+    opacity: 1;
   }
 }
 
 @keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .animated-header {
-    font-size: 2.5rem;
+@keyframes grow-divider {
+  from {
+    width: 0;
+    opacity: 0;
   }
-
-  .header-subtitle {
-    font-size: 1rem;
+  to {
+    width: 200px;
+    opacity: 1;
   }
 }
 
-@media (max-width: 480px) {
-  .animated-header {
-    font-size: 2rem;
+/* Responsive */
+@media (max-width: 768px) {
+  .display-1 {
+    font-size: 2.5rem !important;
+  }
+  .header-subtitle {
+    font-size: 1.1rem;
   }
 }
 </style>

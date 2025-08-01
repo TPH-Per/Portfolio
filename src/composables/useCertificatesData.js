@@ -1,0 +1,128 @@
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+export function useCertificatesData() {
+  const { t } = useI18n()
+
+  const certificates = computed(() => [
+    {
+      title: t('certificates.vue.title'),
+      issuer: 'Vue Mastery',
+      description: t('certificates.vue.description'),
+      date: '2024',
+      color: 'green',
+      icon: 'mdi-vuejs',
+      verified: true,
+      rating: 5,
+      credentialId: 'VM-2024-001',
+      url: 'https://vuejs.org',
+      skills: ['Vue 3', 'Composition API', 'Pinia', 'Vue Router'],
+      details: [
+        t('certificates.vue.details.item1'),
+        t('certificates.vue.details.item2'),
+        t('certificates.vue.details.item3'),
+        t('certificates.vue.details.item4'),
+      ],
+    },
+    {
+      title: t('certificates.js.title'),
+      issuer: 'freeCodeCamp',
+      description: t('certificates.js.description'),
+      date: '2023',
+      color: 'yellow-darken-2',
+      icon: 'mdi-language-javascript',
+      verified: true,
+      rating: 4,
+      credentialId: 'FCC-JS-2023',
+      url: 'https://freecodecamp.org',
+      skills: ['ES6+', 'Async/Await', 'Modules', 'Destructuring'],
+      details: [
+        t('certificates.js.details.item1'),
+        t('certificates.js.details.item2'),
+        t('certificates.js.details.item3'),
+        t('certificates.js.details.item4'),
+      ],
+    },
+    {
+      title: t('certificates.rwd.title'),
+      issuer: 'freeCodeCamp',
+      description: t('certificates.rwd.description'),
+      date: '2023',
+      color: 'blue',
+      icon: 'mdi-web',
+      verified: true,
+      rating: 5,
+      credentialId: 'FCC-RWD-2023',
+      url: 'https://freecodecamp.org',
+      skills: ['HTML5', 'CSS3', 'Flexbox', 'Grid', 'Media Queries'],
+      details: [
+        t('certificates.rwd.details.item1'),
+        t('certificates.rwd.details.item2'),
+        t('certificates.rwd.details.item3'),
+        t('certificates.rwd.details.item4'),
+      ],
+    },
+    {
+      title: t('certificates.git.title'),
+      issuer: 'GitHub',
+      description: t('certificates.git.description'),
+      date: '2022',
+      color: 'grey-darken-2',
+      icon: 'mdi-git',
+      verified: true,
+      rating: 4,
+      credentialId: 'GH-GIT-2022',
+      url: 'https://github.com',
+      skills: ['Git', 'GitHub', 'Branching', 'Merging', 'Collaboration'],
+      details: [
+        t('certificates.git.details.item1'),
+        t('certificates.git.details.item2'),
+        t('certificates.git.details.item3'),
+        t('certificates.git.details.item4'),
+      ],
+    },
+    {
+      title: t('certificates.node.title'),
+      issuer: 'Coursera',
+      description: t('certificates.node.description'),
+      date: '2023',
+      color: 'green-darken-2',
+      icon: 'mdi-nodejs',
+      verified: true,
+      rating: 4,
+      progress: 95,
+      credentialId: 'COUR-NODE-2023',
+      url: 'https://coursera.org',
+      skills: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs'],
+      details: [
+        t('certificates.node.details.item1'),
+        t('certificates.node.details.item2'),
+        t('certificates.node.details.item3'),
+        t('certificates.node.details.item4'),
+      ],
+    },
+    {
+      title: t('certificates.aws.title'),
+      issuer: 'Amazon Web Services',
+      description: t('certificates.aws.description'),
+      date: '2024',
+      color: 'orange',
+      icon: 'mdi-aws',
+      verified: false,
+      rating: 3,
+      progress: 60,
+      credentialId: 'AWS-CP-2024',
+      skills: ['AWS', 'Cloud Computing', 'EC2', 'S3', 'Lambda'],
+      details: [
+        t('certificates.aws.details.item1'),
+        t('certificates.aws.details.item2'),
+        t('certificates.aws.details.item3'),
+        t('certificates.aws.details.item4'),
+      ],
+    },
+  ])
+
+  return {
+    certificates,
+  }
+}
