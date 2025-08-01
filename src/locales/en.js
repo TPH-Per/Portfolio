@@ -56,5 +56,12 @@ export default {
     completed: 'Completed',
     planning: 'Planning',
     target: 'Target',
+    // Thêm các mục tiêu chi tiết
+    jlptN2Title: 'JLPT N2',
+    jlptN2Description: 'Master Japanese language proficiency at N2 level for career advancement',
+    ielts7Title: 'IELTS 7.0',
+    ielts7Description: 'Achieve IELTS band 7.0 for international opportunities',
+    aiMlProjectsTitle: 'AI/ML Projects',
+    aiMlProjectsDescription: 'Develop projects integrating Deep Learning, IoT, and Computer Vision',
   },
 }

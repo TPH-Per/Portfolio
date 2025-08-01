@@ -64,21 +64,22 @@
 
 <script setup>
 import avatarImage from '../assets/suipadoru.jpg'
-import { ref } from 'vue'
+import LanguageSwitcher from './LanguageSwitcher.vue' // 👈 Import component
+import { ref, computed } from 'vue' // 👈 Thêm computed
 import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
 
+const { t } = useI18n()
 const drawer = ref(true)
-const navItems = ref([
-  { title: 'About me', icon: 'mdi-account', path: '/about' },
-  { title: 'Project', icon: 'mdi-gavel', path: '/project' },
-  { title: 'Favorites', icon: 'mdi-heart', path: '/favourites' },
-  { title: 'Target', icon: 'mdi-target', path: '/targets' },
+
+// 👇 Biến navItems thành một computed property để nó có thể phản ứng với thay đổi ngôn ngữ
+const navItems = computed(() => [
+  { title: t('navigation.about'), icon: 'mdi-account', path: '/about' },
+  { title: t('navigation.projects'), icon: 'mdi-gavel', path: '/project' },
+  { title: t('navigation.favorites'), icon: 'mdi-heart', path: '/favourites' },
+  { title: t('navigation.targets'), icon: 'mdi-target', path: '/targets' },
 ])
 
-// 1. Định nghĩa chuỗi tiêu đề
 const titleText = "Welcome to Per's Portfolio"
-// 2. Tách chuỗi thành một mảng các chữ cái
 const titleChars = titleText.split('')
 </script>
 

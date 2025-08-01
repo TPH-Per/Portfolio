@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { useI18n } from 'vue-i18n'
+import i18n from '@/locales' // 👈 Import trực tiếp i18n instance
 
 export const useLocaleStore = defineStore('locale', () => {
-  const { locale } = useI18n()
+  // Lấy locale từ localStorage hoặc mặc định là 'en'
+  const locale = ref(localStorage.getItem('locale') || 'en')
 
   const availableLocales = ref([
     { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -11,20 +12,20 @@ export const useLocaleStore = defineStore('locale', () => {
     { code: 'ja', name: '日本語', flag: '🇯🇵' },
   ])
 
-  const currentLocaleName = computed(() => {
-    const current = availableLocales.value.find((l) => l.code === locale.value)
-    return current ? current.name : 'English'
+  const currentLocale = computed(() => {
+    return availableLocales.value.find((l) => l.code === locale.value) || availableLocales.value[0]
   })
 
-  const setLocale = (newLocale) => {
+  function setLocale(newLocale) {
     locale.value = newLocale
-    localStorage.setItem('locale', newLocale)
+    i18n.global.locale.value = newLocale // Cập nhật locale của vue-i18n
+    localStorage.setItem('locale', newLocale) // Lưu vào localStorage
   }
 
   return {
     locale,
     availableLocales,
-    currentLocaleName,
+    currentLocale,
     setLocale,
   }
 })

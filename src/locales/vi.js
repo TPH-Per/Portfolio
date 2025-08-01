@@ -56,5 +56,13 @@ export default {
     completed: 'Hoàn thành',
     planning: 'Lên kế hoạch',
     target: 'Mục tiêu',
+    // Thêm các mục tiêu chi tiết
+    jlptN2Title: 'JLPT N2',
+    jlptN2Description: 'Thành thạo năng lực tiếng Nhật cấp độ N2 để thăng tiến trong sự nghiệp',
+    ielts7Title: 'IELTS 7.0',
+    ielts7Description: 'Đạt chứng chỉ IELTS 7.0 để có cơ hội quốc tế',
+    aiMlProjectsTitle: 'Dự án AI/ML',
+    aiMlProjectsDescription:
+      'Phát triển các dự án tích hợp Deep Learning, IoT và Thị giác máy tính',
   },
 }

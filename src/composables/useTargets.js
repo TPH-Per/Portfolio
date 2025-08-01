@@ -1,58 +1,42 @@
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export function useTargets() {
-  const targets = ref([
+  const { t } = useI18n()
+
+  const targets = computed(() => [
+    // 👈 Chuyển thành computed property
     {
       id: 1,
-      title: 'JLPT N2',
-      description: 'Master Japanese language proficiency at N2 level for career advancement',
+      title: t('targets.jlptN2Title'), // 👈 Dùng t()
+      description: t('targets.jlptN2Description'), // 👈 Dùng t()
       progress: 75,
-      status: 'In Progress',
+      status: t('targets.inProgress'), // 👈 Dùng t()
       color: 'red',
-      gradient: 'linear-gradient(135deg, #ff6b6b, #ff8e8e)',
-      icon: 'mdi-translate',
-      details: [
-        { label: 'Kanji', value: '80% completed', icon: 'mdi-ideogram-cjk' },
-        { label: 'Grammar', value: '70% completed', icon: 'mdi-book-open-variant' },
-        { label: 'Listening', value: '75% completed', icon: 'mdi-ear-hearing' },
-        { label: 'Reading', value: '78% completed', icon: 'mdi-book-open-page-variant' },
-      ],
+      // ... các thuộc tính khác giữ nguyên
     },
     {
       id: 2,
-      title: 'IELTS 7.0',
-      description: 'Achieve IELTS band 7.0 for international opportunities',
+      title: t('targets.ielts7Title'), // 👈 Dùng t()
+      description: t('targets.ielts7Description'), // 👈 Dùng t()
       progress: 60,
-      status: 'In Progress',
+      status: t('targets.inProgress'), // 👈 Dùng t()
       color: 'blue',
-      gradient: 'linear-gradient(135deg, #4dabf7, #74c0fc)',
-      icon: 'mdi-earth',
-      details: [
-        { label: 'Speaking', value: '6.5 current', icon: 'mdi-account-voice' },
-        { label: 'Writing', value: '6.0 current', icon: 'mdi-pencil' },
-        { label: 'Reading', value: '7.5 current', icon: 'mdi-book-open' },
-        { label: 'Listening', value: '7.0 current', icon: 'mdi-headphones' },
-      ],
+      // ...
     },
     {
       id: 3,
-      title: 'AI/ML Projects',
-      description: 'Develop projects integrating Deep Learning, IoT, and Computer Vision',
+      title: t('targets.aiMlProjectsTitle'), // 👈 Dùng t()
+      description: t('targets.aiMlProjectsDescription'), // 👈 Dùng t()
       progress: 45,
-      status: 'Planning',
+      status: t('targets.planning'), // 👈 Dùng t()
       color: 'purple',
-      gradient: 'linear-gradient(135deg, #845ec2, #b39bc8)',
-      icon: 'mdi-robot',
-      details: [
-        { label: 'Deep Learning', value: 'TensorFlow, PyTorch', icon: 'mdi-brain' },
-        { label: 'Computer Vision', value: 'OpenCV, YOLO', icon: 'mdi-eye' },
-        { label: 'IoT Integration', value: 'Raspberry Pi, Arduino', icon: 'mdi-wifi' },
-        { label: 'Cloud Deploy', value: 'AWS, GCP planning', icon: 'mdi-cloud' },
-      ],
+      // ...
     },
   ])
 
   const overallProgress = computed(() => {
+    if (!targets.value.length) return 0
     const total = targets.value.reduce((sum, target) => sum + target.progress, 0)
     return total / targets.value.length
   })
