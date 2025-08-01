@@ -23,54 +23,9 @@
 </template>
 
 <script setup>
-const aboutMeText = 'About Me'
+import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
+
+const { t } = useI18n()
+const aboutMeText = computed(() => t('about.title'))
 </script>
-
-<style scoped>
-.header-section {
-  position: relative;
-  z-index: 1;
-}
-
-.animated-char {
-  display: inline-block;
-  animation: bounceIn 0.8s ease-out forwards;
-  opacity: 0;
-}
-
-@keyframes bounceIn {
-  0% {
-    opacity: 0;
-    transform: scale(0) rotate(180deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.3) rotate(90deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
-}
-
-.animated-divider {
-  animation: expandWidth 2s ease-out 1s forwards;
-  transform: scaleX(0);
-}
-
-@keyframes expandWidth {
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@media (max-width: 600px) {
-  .display-1 {
-    font-size: 2rem !important;
-  }
-
-  .animated-char {
-    font-size: 1.8rem;
-  }
-}
-</style>

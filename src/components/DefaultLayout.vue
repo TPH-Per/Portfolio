@@ -52,7 +52,7 @@
           </span>
         </div>
       </v-app-bar-title>
-
+      <LanguageSwitcher />
       <v-btn :icon="drawer ? 'mdi-close' : 'mdi-menu'" @click="drawer = !drawer"></v-btn>
     </v-app-bar>
 
@@ -65,6 +65,8 @@
 <script setup>
 import avatarImage from '../assets/suipadoru.jpg'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const drawer = ref(true)
 const navItems = ref([

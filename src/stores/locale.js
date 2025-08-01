@@ -1,44 +1,30 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export const useLocaleStore = defineStore('locale', () => {
-  // State
-  const currentLocale = ref(localStorage.getItem('locale') || 'en')
+  const { locale } = useI18n()
+
   const availableLocales = ref([
     { code: 'en', name: 'English', flag: '🇺🇸' },
     { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
     { code: 'ja', name: '日本語', flag: '🇯🇵' },
   ])
 
-  // Getters
   const currentLocaleName = computed(() => {
-    const locale = availableLocales.value.find((l) => l.code === currentLocale.value)
-    return locale ? locale.name : 'English'
+    const current = availableLocales.value.find((l) => l.code === locale.value)
+    return current ? current.name : 'English'
   })
 
-  const currentLocaleFlag = computed(() => {
-    const locale = availableLocales.value.find((l) => l.code === currentLocale.value)
-    return locale ? locale.flag : '🇺🇸'
-  })
-
-  // Actions
-  const setLocale = (locale) => {
-    currentLocale.value = locale
-    localStorage.setItem('locale', locale)
-  }
-
-  const toggleLocale = () => {
-    const currentIndex = availableLocales.value.findIndex((l) => l.code === currentLocale.value)
-    const nextIndex = (currentIndex + 1) % availableLocales.value.length
-    setLocale(availableLocales.value[nextIndex].code)
+  const setLocale = (newLocale) => {
+    locale.value = newLocale
+    localStorage.setItem('locale', newLocale)
   }
 
   return {
-    currentLocale,
+    locale,
     availableLocales,
     currentLocaleName,
-    currentLocaleFlag,
     setLocale,
-    toggleLocale,
   }
 })

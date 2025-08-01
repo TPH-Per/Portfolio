@@ -1,4 +1,3 @@
-// main.js
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
@@ -7,6 +6,7 @@ import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
 import App from './App.vue'
 import router from './router'
+import i18n from './locales' // Import i18n
 
 const vuetify = createVuetify({
   components,
@@ -16,5 +16,6 @@ const vuetify = createVuetify({
 const app = createApp(App)
 
 app.use(router)
-app.use(vuetify) // Quan trọng: phải use vuetify trước khi mount
+app.use(vuetify)
+app.use(i18n) // Sử dụng i18n
 app.mount('#app')
