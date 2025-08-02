@@ -94,6 +94,7 @@ onUnmounted(() => {
   animation:
     floatUp 0.8s ease-out forwards,
     gentlePulse 4s ease-in-out infinite 2s;
+  will-change: transform, box-shadow;
 }
 
 @keyframes gentlePulse {

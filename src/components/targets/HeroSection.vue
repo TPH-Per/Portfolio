@@ -63,6 +63,8 @@ defineProps({
     wave-bounce 2s ease-in-out infinite,
     color-shift 3s linear infinite;
   transform-origin: center bottom;
+  /* Thêm thuộc tính will-change để GPU xử lý animation */
+  will-change: transform;
 }
 
 .hero-subtitle {

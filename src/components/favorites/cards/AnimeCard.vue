@@ -52,6 +52,8 @@ defineProps({
   overflow: hidden;
   position: relative;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform, box-shadow;
 }
 
 .media-card:hover {

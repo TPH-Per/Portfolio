@@ -1,20 +1,13 @@
 <template>
   <div class="project-image-container">
-    <v-img :src="project.image" height="200" cover class="project-image" :alt="project.title">
-      <div class="overlay">
-        <v-btn
-          :href="project.github"
-          target="_blank"
-          icon
-          size="large"
-          class="github-btn"
-          variant="flat"
-          color="white"
-          :aria-label="`View ${project.title} on GitHub`"
-        >
-          <v-icon size="x-large">mdi-github</v-icon>
-        </v-btn>
-      </div>
+    <v-img
+      :src="project.image"
+      height="200"
+      cover
+      class="project-image"
+      :alt="project.title"
+      loading="lazy"
+    >
     </v-img>
   </div>
 </template>

@@ -107,15 +107,19 @@ const statusColor = computed(() => {
   border-radius: 20px;
   overflow: hidden;
   position: relative;
+  /* Gợi ý cho trình duyệt rằng transform sẽ thay đổi thường xuyên */
+  will-change: transform;
+  /* Buộc trình duyệt tạo một layer riêng cho card, đẩy việc xử lý sang GPU */
+  transform: translateZ(0);
 }
 
 .target-card:hover {
-  transform: translateY(-10px) scale(1.02);
+  transform: translateY(-10px) scale(1.02) translateZ(0); /* Giữ lại translateZ */
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .card-flipped {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(0); /* Giữ lại translateZ */
 }
 
 .card-front,
@@ -148,6 +152,8 @@ const statusColor = computed(() => {
   height: 200%;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   animation: shimmer 3s linear infinite;
+  /* Tối ưu hóa cho hiệu ứng shimmer */
+  will-change: transform;
 }
 
 .target-icon {

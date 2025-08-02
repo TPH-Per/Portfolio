@@ -34,6 +34,7 @@ const getParticleStyle = (n) => {
   border-radius: 50%;
   animation: float 10s infinite linear;
   opacity: 0.7;
+  will-change: transform, opacity;
 }
 
 @keyframes float {

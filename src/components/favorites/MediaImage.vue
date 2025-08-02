@@ -1,13 +1,7 @@
 <template>
   <div class="card-image-wrapper">
-    <v-img :src="image" :height="imageHeight" cover class="card-image" :alt="title">
-      <div class="image-overlay">
-        <slot name="overlay" />
-      </div>
+    <v-img :src="image" :height="imageHeight" cover class="card-image" :alt="title" loading="lazy">
     </v-img>
-    <div class="hover-overlay">
-      <slot name="hover-action" />
-    </div>
   </div>
 </template>
 
