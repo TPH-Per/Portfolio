@@ -54,6 +54,8 @@ defineEmits(['card-hover', 'card-leave'])
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   overflow: hidden;
   position: relative;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
 }
 
 .project-card::before {

@@ -20,24 +20,31 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue' // Thêm onUnmounted
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
 const summaryText = computed(() => t('about.summary'))
 const displayedSummary = ref('')
+let typewriterInterval = null // Biến để lưu trữ ID của interval
 
 const typewriterEffect = () => {
-  displayedSummary.value = '' // Reset
+  // Dọn dẹp interval cũ trước khi bắt đầu cái mới
+  if (typewriterInterval) {
+    clearInterval(typewriterInterval)
+  }
+
+  displayedSummary.value = '' // Reset văn bản hiển thị
   let index = 0
   const text = summaryText.value
-  const interval = setInterval(() => {
+
+  typewriterInterval = setInterval(() => {
     if (index < text.length) {
       displayedSummary.value += text[index]
       index++
     } else {
-      clearInterval(interval)
+      clearInterval(typewriterInterval) // Dọn dẹp khi đã gõ xong
     }
   }, 30)
 }
@@ -48,11 +55,24 @@ watch(summaryText, () => {
 })
 
 onMounted(() => {
-  setTimeout(typewriterEffect, 1000)
+  // Dùng setTimeout để trì hoãn hiệu ứng một chút
+  const initialTimeout = setTimeout(typewriterEffect, 1000)
+  // Dọn dẹp timeout này nếu component bị hủy trước khi nó chạy
+  onUnmounted(() => {
+    clearTimeout(initialTimeout)
+  })
+})
+
+// Dọn dẹp interval khi component bị hủy hoàn toàn
+onUnmounted(() => {
+  if (typewriterInterval) {
+    clearInterval(typewriterInterval)
+  }
 })
 </script>
 
 <style scoped>
+/* ... (CSS giữ nguyên) ... */
 .floating-card {
   animation: floatUp 0.8s ease-out forwards;
   opacity: 0;

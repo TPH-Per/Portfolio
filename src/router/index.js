@@ -1,13 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
-// Layout chính
 import DefaultLayout from '@/components/DefaultLayout.vue'
-
-// Import chính xác các file view với đúng tên và chữ hoa/thường
-import About from '../views/About.vue'
-import Project from '../views/Projects.vue'
-import Favourites from '../views/Favorites.vue'
-import Targets from '../views/Targets.vue'
 
 const routes = [
   {
@@ -18,22 +10,26 @@ const routes = [
       {
         path: '/about',
         name: 'About',
-        component: About,
+        // Lazy loading component About.vue
+        component: () => import('../views/About.vue'),
       },
       {
         path: '/project',
         name: 'Project',
-        component: Project,
+        // Lazy loading component Projects.vue
+        component: () => import('../views/Projects.vue'),
       },
       {
         path: '/favourites',
         name: 'Favourites',
-        component: Favourites,
+        // Lazy loading component Favorites.vue
+        component: () => import('../views/Favorites.vue'),
       },
       {
         path: '/targets',
         name: 'Targets',
-        component: Targets,
+        // Lazy loading component Targets.vue
+        component: () => import('../views/Targets.vue'),
       },
     ],
   },

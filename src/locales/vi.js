@@ -221,19 +221,40 @@ export default {
   },
 
   favoritesDetails: {
+    music: {
+      jujutsu: 'Chú thuật hồi chiến Mùa 2',
+      bocchi: 'Bocchi the Rock!',
+      hatsune_miku: 'Hatsune Miku',
+      more_than_words: {
+        title: 'More Than Words',
+        artist: 'Hitsujibungaku',
+      },
+      seiza_ni_naretara: {
+        title: 'Nếu tớ có thể trở thành một chòm sao',
+        artist: 'Kessoku Band',
+      },
+      shoujo_rei: {
+        title: 'Shoujo Rei',
+        artist: 'Mikito-P',
+      },
+      flos: {
+        title: 'Flos',
+        artist: 'R Sound Design',
+      },
+    },
     anime: {
       takopi: {
-        title: 'Tội lỗi của Takopi',
+        title: 'Nguyên tội của Takopi',
         description:
           'Câu chuyện đau lòng về một người ngoài hành tinh cố gắng mang lại hạnh phúc nhưng lại đối mặt với thực tại phũ phàng của Trái Đất.',
       },
       hibike: {
-        title: 'Kèn Euphonium',
+        title: 'Vang lên! Euphonium',
         description:
           'Theo chân Kumiko Oumae và hành trình của dàn nhạc trường Kitauji hướng tới giải quốc gia.',
       },
       codegeass: {
-        title: 'Code Geass: Lelouch nổi loạn',
+        title: 'Code Geass: Lelouch of the Rebellion',
         description:
           'Lelouch vi Britannia nhận được sức mạnh Geass và lãnh đạo một cuộc nổi dậy chống lại Đế quốc Britannia Thần thánh.',
       },
@@ -245,12 +266,12 @@ export default {
     },
     manga: {
       chainsaw: {
-        title: 'Thợ săn quỷ',
+        title: 'Chainsaw man',
         description:
           'Denji, một chàng trai trẻ mắc nợ, trở thành Thợ Săn Quỷ với trái tim của một con quỷ cưa.',
       },
       lookback: {
-        title: 'Ngoảnh lại',
+        title: 'Look Back',
         description:
           'Một one-shot đầy cảm xúc về sự sáng tạo, tình bạn và những con đường khác nhau trong cuộc sống.',
       },

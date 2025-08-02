@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export function useFavoritesData() {
@@ -148,37 +148,37 @@ export function useFavoritesData() {
   ])
 
   // Music data giữ nguyên vì chủ yếu là tên bài hát và nghệ sĩ
-  const anisonList = ref([
+  const anisonList = computed(() => [
     {
       id: 1,
-      title: 'More Than Words',
-      artist: 'Hitsujibungaku',
+      title: t('favoritesDetails.music.more_than_words.title'),
+      artist: t('favoritesDetails.music.more_than_words.artist'),
       image: 'https://i1.sndcdn.com/artworks-96yS3458x2c2SUwP-d1gBEQ-t500x500.jpg',
-      anime: 'Jujutsu Kaisen S2',
+      anime: t('favoritesDetails.music.jujutsu'),
     },
     {
       id: 2,
-      title: 'Seiza ni Naretara',
-      artist: 'Kessoku Band',
+      title: t('favoritesDetails.music.seiza_ni_naretara.title'),
+      artist: t('favoritesDetails.music.seiza_ni_naretara.artist'),
       image: 'https://i1.sndcdn.com/artworks-A6564N4285uLmwI1-0l1g4Q-t500x500.jpg',
-      anime: 'Bocchi the Rock!',
+      anime: t('favoritesDetails.music.bocchi'),
     },
   ])
 
-  const vocaloidList = ref([
+  const vocaloidList = computed(() => [
     {
       id: 1,
-      title: 'Shoujo Rei',
-      artist: 'Mikito-P',
-      vocaloid: 'Hatsune Miku',
+      title: t('favoritesDetails.music.shoujo_rei.title'),
+      artist: t('favoritesDetails.music.shoujo_rei.artist'),
+      vocaloid: t('favoritesDetails.music.hatsune_miku'),
       vocaloidColor: 'teal',
       image: 'https://i1.sndcdn.com/artworks-000433292150-m81t2i-t500x500.jpg',
     },
     {
       id: 2,
-      title: 'Flos',
-      artist: 'R Sound Design',
-      vocaloid: 'Hatsune Miku',
+      title: t('favoritesDetails.music.flos.title'),
+      artist: t('favoritesDetails.music.flos.artist'),
+      vocaloid: t('favoritesDetails.music.hatsune_miku'),
       vocaloidColor: 'teal',
       image: 'https://i1.sndcdn.com/artworks-000405021204-p5d2eu-t500x500.jpg',
     },

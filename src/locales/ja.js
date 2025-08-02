@@ -221,6 +221,27 @@ export default {
   },
 
   favoritesDetails: {
+    music: {
+      jujutsu: '呪術廻戦 第2期',
+      bocchi: 'ぼっち・ざ・ろっく！',
+      hatsune_miku: '初音ミク',
+      more_than_words: {
+        title: 'More Than Words',
+        artist: '羊文学',
+      },
+      seiza_ni_naretara: {
+        title: '星座になれたら',
+        artist: '結束バンド',
+      },
+      shoujo_rei: {
+        title: '少女レイ',
+        artist: 'みきとP',
+      },
+      flos: {
+        title: 'フロス',
+        artist: 'R Sound Design',
+      },
+    },
     anime: {
       takopi: {
         title: 'タコピーの原罪',

@@ -1,6 +1,12 @@
 <template>
   <v-card class="media-card anime-card" elevation="0">
-    <MediaImage :image="anime.image" :title="anime.title" type="anime">
+    <MediaImage
+      :image="anime.image"
+      :title="anime.title"
+      type="anime"
+      loading="lazy"
+      placeholder="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+    >
       <template #overlay>
         <v-chip class="rating-chip" :color="anime.ratingColor" variant="flat">
           ⭐ {{ anime.rating }}

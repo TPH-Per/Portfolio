@@ -313,6 +313,27 @@ export default {
   },
 
   favoritesDetails: {
+    music: {
+      jujutsu: 'Jujutsu Kaisen S2',
+      bocchi: 'Bocchi the Rock!',
+      hatsune_miku: 'Hatsune Miku',
+      more_than_words: {
+        title: 'More Than Words',
+        artist: 'Hitsujibungaku',
+      },
+      seiza_ni_naretara: {
+        title: 'If I Could Be a Constellation',
+        artist: 'Kessoku Band',
+      },
+      shoujo_rei: {
+        title: 'Ghost Girl',
+        artist: 'Mikito-P',
+      },
+      flos: {
+        title: 'Flos',
+        artist: 'R Sound Design',
+      },
+    },
     anime: {
       takopi: {
         title: "Takopi's Original Sin",
