@@ -1,32 +1,15 @@
 <template>
-  <v-container fluid class="pa-6">
-    <!-- Floating particles background -->
+  <div class="about-page">
     <ParticlesBackground />
-
-    <!-- Header Section -->
     <AboutHeader />
-
-    <!-- Summary Section -->
     <AboutSummary />
-
-    <!-- Education Section -->
     <AboutEducation />
     <AboutCertificates />
-
-    <!-- Skills Section -->
     <AboutSkills />
-
-    <!-- Experience Section -->
     <AboutExperience />
-
-    <!-- Certificates Section -->
-
-    <!-- Floating action button -->
     <CelebrationButton @celebrate="triggerCelebration" />
-
-    <!-- Celebration particles -->
     <CelebrationEffect :show="showCelebration" />
-  </v-container>
+  </div>
 </template>
 
 <script setup>
